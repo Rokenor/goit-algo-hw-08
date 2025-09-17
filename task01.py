@@ -1,23 +1,7 @@
-class Node:
-    '''Клас для представлення вузла двійкового дерева'''
-    def __init__(self, key):
-        self.left = None
-        self.right = None
-        self.key = key
+from bst import NodeBST, insert_bst
+from avl import insert_avl
 
-def insert_bst(root, key):
-    '''Рекурсивна функція дл вставки нового ключа в двійкове дерево пошуку'''
-    if root is None:
-        return Node(key)
-    
-    if key < root.key:
-        root.left = insert_bst(root.left, key)
-    else:
-        root.right = insert_bst(root.right, key)
-        
-    return root
-
-def find_min_value(root: Node):
+def find_min_value(root: NodeBST):
     '''Знаходить найменше значення в двійковому дереві'''
     if root is None:
         return None
@@ -30,23 +14,27 @@ def find_min_value(root: Node):
     return current.key
 
 if __name__ == "__main__":
-    # Створення кореня для дерева
+    # Створення коренів для обох дерев
     root_bst = None
+    root_avl = None
 
     elements = [30, 20, 40, 10, 25, 50, 5]
 
-    # Формування дерева шляхом додавання елементів
+    # Формування дерев шляхом додавання елементів
     for el in elements:
         root_bst = insert_bst(root_bst, el)
+        root_avl = insert_avl(root_avl, el)
 
-    print("Дерево успішно сформовано.")
+    print("Дерева успішно сформовано.")
     print("-" * 30)
 
-    # Пошук найменшого значення в дереві
+    # Пошук найменшого значення в обох деревах
     min_val_bst = find_min_value(root_bst)
+    min_val_avl = find_min_value(root_avl)
 
     print(f"Елементи для вставки: {elements}")
-    print(f"Найменше значення в BST: {min_val_bst}") 
+    print(f"Найменше значення в звичайному BST: {min_val_bst}")
+    print(f"Найменше значення в AVL-дереві: {min_val_avl}")
 
     # Перевірка на порожньому дереві
     print("-" * 30)
